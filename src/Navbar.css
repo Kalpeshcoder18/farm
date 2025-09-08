@@ -1,0 +1,81 @@
+
+.navbar-sticky {
+  background-color: #fff;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  font-family: 'Montserrat', sans-serif;
+  
+  /* The magic for the sticky effect! */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  
+  /* A subtle shadow to lift it off the page */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  
+}
+
+.navbar-logo {
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fc8019; /* Swiggy's primary orange */
+}
+
+/* You can style your actual logo image if you use one */
+.navbar-logo img {
+  height: 70px; 
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem; /* Adds space between menu items */
+}
+
+.nav-link {
+  color: #3d4152; /* A dark grey for text */
+  text-decoration: none;
+  padding: 8px 0; /* Padding for a larger click area */
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease-in-out;
+}
+
+/* The hover effect for non-active links */
+.nav-link:hover {
+  color: #B0712F;
+}
+
+/* The style for the ACTIVE link */
+.nav-link.active {
+  color: #B0712F;
+  font-weight: 700;
+}
+
+/* The underline effect for the ACTIVE and HOVER states */
+.nav-link.active::after,
+.nav-link:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; /* Position the line below the text */
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #B0712F;
+  border-radius: 2px;
+}

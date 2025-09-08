@@ -1,0 +1,1408 @@
+
+/* === Color Palette & Tokens === */
+:root {
+  --primary: #B0712F;          /* main brand color */
+  --primary-600: #995F29;
+  --primary-700: #7A4B20;
+  --primary-100: #F6EEE5;
+
+  --accent: var(--primary);
+
+  --bg: #FAFAFA;
+  --surface: #FFFFFF;
+
+  --muted: #9AA0A6;
+  --muted-2: #6B7280;
+
+  --border: #E5E7EB;
+  --shadow: 0 6px 16px rgba(11, 15, 19, 0.06);
+
+  --radius: 12px;
+  --radius-sm: 8px;
+
+  --glass: rgba(255, 255, 255, 0.6);
+}
+
+/* === Base === */
+body {
+  background: var(--bg);
+  color: #263046;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+/* Branding color */
+:root {
+  --brand: #B0712F;
+  --muted: #6b7280;
+}
+
+/* Card hover */
+.animal-card {
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  border: 1px solid #eef0f2;
+  border-radius: 10px;
+}
+.animal-card:hover {
+  transform: translateY(-9px);
+  box-shadow: 0 14px 62px rgba(199, 118, 31, 0.12);
+  border-color: rgba(193, 109, 20, 0.35);
+}
+
+/* Ensure view details is aligned at bottom (we applied mt-auto in JSX) */
+/* Symptom badges spacing */
+.badge.bg-danger-subtle {
+  background: #fff5f5;
+  color: #9b1c1c;
+  border: 1px solid #fee2e2;
+}
+.badge.bg-secondary {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* Vaccine chips */
+.vaccine-chip {
+  background: #fff;
+  border: 1px solid #eef0f2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #111827;
+}
+.vaccine-chip .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display:inline-block;
+}
+
+/* Modal backdrop with blur */
+.custom-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1080;
+  background: rgba(10, 10, 10, 0.35);
+  /* blur the background */
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  padding: 30px;
+}
+
+/* Dialog box */
+.custom-modal-dialog {
+  max-width: 920px;
+  width: 100%;
+  max-height: 86vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal content styling like screenshot */
+.custom-modal-content {
+  background: white;
+  border-radius: 10px;
+  padding: 22px;
+  box-shadow: 0 20px 60px rgba(2,6,23,0.24);
+  border: 1px solid #eef0f2;
+  width: 100%;
+}
+
+/* allow internal scrolling */
+.custom-modal-content > .row,
+.custom-modal-content { max-height: 72vh; overflow: auto; }
+
+/* small utilities */
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; }
+
+/* vaccine dot colors */
+.vaccine-chip .dot.bg-success { background: #16a34a; }
+
+/* responsive */
+@media (max-width: 768px) {
+  .custom-modal-dialog { padding: 12px; }
+  .custom-modal-content { padding: 14px; border-radius: 8px; }
+}
+
+
+:root {
+  --brand: #bc8b57;
+}
+
+/* Base KPI card */
+.kpi-card {
+  transition: all 0.25s ease-in-out;
+  border-radius: 12px;
+}
+
+/* Hover effect */
+.kpi-card:hover {
+  background-color: var(--brand);
+  color: #fff !important;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+.kpi-card:hover h6,
+.kpi-card:hover .text-muted,
+.kpi-card:hover .display-6,
+.kpi-card:hover small,
+.kpi-card:hover svg {
+  color: #fff !important;
+}
+
+.kpi-card .display-6 {
+  color: var(--brand);
+}
+
+.alert-card {
+  border-left: 4px solid #dc2626 !important;
+}
+
+/* card-hover.css */
+.card-hover {
+  transition: all 0.2s ease-in-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  background-color: #f8f9fa; /* Bootstrap's light background */
+}
+
+
+/* === Layout === */
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #fbfbfb 0%, #f7f4f0 100%);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+}
+.sidebar-sub {
+  color: var(--muted-2);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+/* Menu */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #1F2937;
+  border: none;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+.menu-item:hover {
+  background: #F6EEE5;
+}
+.menu-item.active {
+  background: var(--primary-100);
+  border: 1px solid var(--primary-600);
+  box-shadow: 0 2px 6px rgba(176, 113, 47, 0.1);
+}
+
+/* --- Header --- */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  background: var(--surface);
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.header h1 {
+  font-size: 1.6rem;
+  margin: 0;
+  font-weight: 700;
+}
+.header .muted {
+  color: var(--muted-2);
+  font-size: 0.95rem;
+}
+
+/* --- KPI Row --- */
+.kpi-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px 28px 8px;
+}
+.kpi-card {
+  flex: 1;
+  min-width: 220px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid #F1E7D9;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(11, 15, 19, 0.08);
+}
+.kpi-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.kpi-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111827;
+}
+.kpi-title {
+  color: var(--muted-2);
+  font-size: 0.95rem;
+}
+.kpi-caption {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Critical KPI style */
+.kpi-card.critical {
+  background: #fff5f5;
+  border: 1px solid #FECACA;
+  color: #991B1B;
+}
+
+/* --- Panels / Grid --- */
+.container {
+  padding: 0 28px 28px;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 20px;
+  align-items: start;
+  padding: 0 28px 28px;
+}
+@media (max-width: 1000px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+.panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.panel-title {
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  color: #111827;
+  font-size: 1.02rem;
+}
+
+/* --- Compliance Chart --- */
+.compliance-bars {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  padding-top: 12px;
+  height: 220px;
+}
+.compliance-bar {
+  width: 40px;
+  border-radius: 6px 6px 0 0;
+  background: var(--primary-700);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(176, 113, 47, 0.12);
+}
+
+/* --- Alerts --- */
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.alert-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #F1E7E5;
+  background: #fff;
+}
+.alert-content {
+  flex: 1;
+}
+.alert-meta {
+  color: var(--muted-2);
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.badge.critical {
+  background: #FDECEA;
+  color: #B91C1C;
+  border: 1px solid #FECACA;
+}
+.badge.warning {
+  background: #FFFAF0;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+.badge.info {
+  background: #EFF6FF;
+  color: #1E3A8A;
+  border: 1px solid #BFDBFE;
+}
+
+/* --- Farm Units Table --- */
+.table-wrap {
+  overflow: auto;
+}
+.simple-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.simple-table th,
+.simple-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #F3F4F6;
+  text-align: left;
+  font-size: 0.92rem;
+}
+.simple-table th {
+  color: var(--muted-2);
+  font-weight: 600;
+}
+.table-row:hover {
+  background: #fafafa;
+}
+.view-btn {
+  background: transparent;
+  border: 1px solid var(--primary-600);
+  color: var(--primary-700);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.view-btn:hover {
+  background: var(--primary-100);
+}
+
+/* --- Buttons --- */
+.btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(176, 113, 47, 0.12);
+}
+.btn:hover {
+  background: var(--primary-600);
+}
+.btn.ghost {
+  background: transparent;
+  color: var(--primary-700);
+  border: 1px solid #E8D9C6;
+}
+
+/* --- Misc --- */
+.muted {
+  color: var(--muted-2);
+}
+.report-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #F1E7D9;
+  background: #fff;
+  margin-bottom: 8px;
+}
+
+
+
+/* recent alert.jsx */
+.alert-list { display:flex; flex-direction:column; gap:12px; }
+.alert-item {
+  display:flex; gap:12px; align-items:flex-start;
+  padding:12px; border-radius:10px; border:1px solid #F1E7E5; background:#fff;
+}
+.alert-content { flex:1; }
+.alert-meta { color:var(--muted-2); font-size:0.85rem; margin-top:6px; }
+
+.badge { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; font-weight:700; font-size:0.85rem; }
+.badge.critical { background:#FDECEA; color:#B91C1C; border:1px solid #FECACA; }
+.badge.warning { background:#FFFAF0; color:#92400E; border:1px solid #FDE68A; }
+.badge.info { background:#EFF6FF; color:#1E3A8A; border:1px solid #BFDBFE; }
+
+
+
+/* --- Quick Actions --- */
+.quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quick-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0 14px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #374151;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.quick-btn:hover {
+  background: var(--primary-100);
+  border-color: var(--primary-600);
+  color: var(--primary-700);
+}
+
+.quick-btn svg {
+  flex-shrink: 0;
+  color: var(--primary-600);
+}
+
+
+/* --- Farm Units Table --- */
+.table-wrap {
+  overflow-x: auto;
+}
+
+.simple-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.simple-table th,
+.simple-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #f3f4f6;
+  text-align: left;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+.simple-table th {
+  color: var(--muted-2);
+  font-weight: 600;
+}
+
+.simple-table tr:hover {
+  background: #faf6f1;
+}
+
+/* Badge styles -farmunit.jsx*/
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge.complete {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.badge.incomplete {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.badge.pending {
+  background: #fff7ed;
+  color: #92400e;
+  border: 1px solid #fed7aa;
+}
+
+/* Action button */
+.view-btn {
+  background: transparent;
+  border: 1px solid var(--primary-600);
+  color: var(--primary-700);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.view-btn:hover {
+  background: var(--primary-100);
+}
+
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+/* Modal */
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.modal-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* Info sections */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+}
+
+/* Badge base */
+.badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Status-specific classes (safe names) */
+.badge.status-healthy {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #bbf7d0;
+}
+
+.badge.status-under-treatment {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.badge.status-critical {
+  background: #fff1f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.badge.status-quarantine {
+  background: #fff7ed;
+  color: #92400e;
+  border: 1px solid #fed7aa;
+}
+
+.badge.status-unknown {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+
+/* Cards */
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #fafafa;
+}
+.card-row {
+  display: flex;
+  gap: 12px;
+}
+
+
+/* Vaccinations */
+.vaccinations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.vaccination {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 6px 10px;
+  background: #f9fafb;
+  font-size: 0.9rem;
+}
+.vaccination .dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Buttons */
+.btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn.ghost {
+  background: transparent;
+  border: 1px solid var(--primary-600);
+  color: var(--primary-700);
+}
+.btn.small {
+  padding: 4px 8px;
+  font-size: 0.85rem;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+
+
+/* --- Animals Page styles --- */
+.animals-page { padding: 0 28px 28px; }
+
+/* Header */
+.page-header { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:18px; padding-top:8px; }
+.page-title { font-size:1.6rem; margin:0; font-weight:700; }
+.header-actions { display:flex; gap:10px; align-items:center; }
+.btn { background: var(--primary); color: #fff; border:0; padding:10px 14px; border-radius:10px; display:inline-flex; gap:8px; align-items:center; cursor:pointer; font-weight:600; }
+.btn.ghost { background: transparent; color: #111827; border:1px solid var(--border); }
+.btn.ghost svg { color: var(--muted-2); }
+.btn.outline { background: transparent; border:1px solid var(--border); color: #111827; }
+.btn.full { width:100%; justify-content:center; }
+
+/* Filters */
+.filters { display:flex; gap:12px; align-items:center; margin-bottom:18px; flex-wrap:wrap; }
+.search-input { position:relative; flex:1; max-width:640px; }
+.search-input .search-icon { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--muted-2); }
+.input { width:100%; padding:10px 12px 10px 36px; border-radius:10px; border:1px solid var(--border); background:var(--surface); }
+.select { padding:10px 12px; border-radius:10px; border:1px solid var(--border); background:var(--surface); }
+
+/* Cards grid */
+.cards-grid { display:grid; grid-template-columns: repeat(1,1fr); gap:16px; }
+@media (min-width:700px) { .cards-grid { grid-template-columns: repeat(2,1fr); } }
+@media (min-width:1000px) { .cards-grid { grid-template-columns: repeat(3,1fr); } }
+@media (min-width:1300px) { .cards-grid { grid-template-columns: repeat(4,1fr); } }
+
+.animal-card { background: var(--surface); border-radius:12px; box-shadow: var(--shadow); border:1px solid var(--border); overflow:hidden; cursor:pointer; display:flex; flex-direction:column; transition:box-shadow 0.18s ease, transform 0.12s ease; }
+.animal-card:hover { box-shadow: 0 18px 40px rgba(11,15,19,0.06); transform: translateY(-4px); }
+
+.card-image { width:100%; height:180px; overflow:hidden; border-bottom:1px solid #f3f3f3; display:flex; align-items:center; justify-content:center; background:#f6f6f6; }
+.card-image img { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Body */
+.card-body { padding:16px; display:flex; flex-direction:column; gap:10px; }
+.card-title-row { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.card-title { margin:0; font-size:1.02rem; font-weight:700; }
+.status-badge { padding:6px 10px; border-radius:999px; font-weight:700; font-size:0.85rem; }
+
+/* status colors */
+.status-healthy { background:#0f172a; color:#fff; } /* dark pill like screenshot */
+.status-under-treatment { background:#fff7ed; color:#92400e; border:1px solid #fde3b8; }
+.status-critical { background:#fff5f5; color:#991b1b; border:1px solid #fecaca; }
+.status-quarantine { background:#fff7ed; color:#92400e; border:1px solid #fed7aa; }
+
+/* small muted text */
+.muted { color:var(--muted-2); font-size:0.95rem; }
+
+/* stats grid */
+.card-stats { display:flex; gap:18px; justify-content:flex-start; }
+.card-stats > div { min-width:120px; }
+.small-info { display:grid; grid-template-columns: 1fr 1fr; gap:12px; font-size:0.95rem; }
+
+/* mono for batch id */
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; font-weight:600; }
+
+/* symptoms tags */
+.symptoms { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:6px; }
+.tag { padding:6px 10px; border-radius:999px; background:#f3f4f6; font-weight:600; font-size:0.82rem; }
+.tag-danger { background:#fff1f2; color:#991b1b; border:1px solid #fecaca; }
+
+/* card actions */
+.card-actions { margin-top:6px; }
+.outline { background:transparent; border:1px solid var(--border); border-radius:8px; padding:8px 12px; cursor:pointer; }
+
+/* empty state */
+.empty-state { text-align:center; padding:24px 0; }
+
+/* small helpers */
+.page-title { color: #0f172a; }
+
+
+
+/* ================================
+   Base Layout
+================================ */
+.container {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: #fbfbfb;
+  color: #111827;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+.page-sub {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* ================================
+   KPI Row
+================================ */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.kpi {
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  padding: 16px 20px;
+}
+.kpi-title {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+.kpi-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-top: 4px;
+}
+.kpi.overdue {
+  background: #fff7ed;
+  border: 1px solid #fdba74;
+}
+.kpi.overdue .kpi-value {
+  color: #ea580c;
+}
+
+/* ================================
+   Tabs
+================================ */
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+.tab {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: #f3f4f6;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.tab.active {
+  background: #b0712f;
+  color: #fff;
+  border: 1px solid #995f29;
+}
+
+/* ================================
+   Controls (search + filter)
+================================ */
+.controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+.select {
+  min-width: 180px;
+}
+
+/* ================================
+   Records List
+================================ */
+.records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.record {
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+.record-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.record-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.type-icon {
+  font-size: 1.4rem;
+}
+.desc {
+  font-weight: 600;
+  margin: 0;
+}
+.sub {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Record grid details */
+.record-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+.muted {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+.mono {
+  font-family: monospace;
+}
+
+/* Notes */
+.notes {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #f3f4f6;
+  font-size: 0.9rem;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* ================================
+   Badges
+================================ */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.badge.default {
+  background: #e5e7eb;
+  color: #111827;
+}
+.badge.secondary {
+  background: #fef9c3;
+  color: #854d0e;
+}
+.badge.outline {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #374151;
+}
+
+/* ================================
+   Buttons
+================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #b0712f;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn:hover {
+  background: #995f29;
+}
+.btn.outline {
+  background: #fff;
+  color: #b0712f;
+  border: 1px solid #b0712f;
+}
+.btn.outline:hover {
+  background: #fef3c7;
+}
+
+
+
+/* === Manager Reports Page Styling === */
+
+
+
+
+/* --- Color tokens --- */
+:root {
+  --bg: #FBFBFB;
+  --surface: #FFFFFF;
+  --muted-1: #9AA0A6;
+  --muted-2: #6B7280;
+  --border: #E5E7EB;
+  --shadow: 0 6px 18px rgba(11,15,19,0.06);
+  --radius: 12px;
+
+  --green: #16a34a;
+  --blue: #2563eb;
+  --purple: #7c3aed;
+  --red: #dc2626;
+  --orange: #ea580c;
+}
+
+/* Page wrapper */
+.reports-page {
+  padding: 28px 32px;
+  background: var(--bg);
+  color: #111827;
+}
+
+/* Headers */
+.reports-page h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+}
+.reports-page p {
+  color: var(--muted-2);
+  margin: 0 0 14px 0;
+  font-size: 0.95rem;
+}
+
+/* === Cards === */
+.report-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.report-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(11, 15, 19, 0.08);
+}
+
+/* Card title */
+.report-card .card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+/* === Stats Grid === */
+.report-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+@media (max-width: 900px) {
+  .report-stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .report-stats-grid { grid-template-columns: 1fr; }
+}
+
+.report-stat {
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #f3f3f4;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.report-stat:hover {
+  background: #fafafa;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.report-stat .label {
+  color: var(--muted-2);
+  font-size: 0.88rem;
+}
+.report-stat .value {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.report-stat .value.green { color: var(--green); }
+.report-stat .value.blue { color: var(--blue); }
+.report-stat .value.purple { color: var(--purple); }
+.report-stat .value.red { color: var(--red); }
+
+/* === Table === */
+.reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.reports-table th,
+.reports-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f3f4f6;
+}
+.reports-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--muted-2);
+}
+.reports-table td { color: #111827; }
+.reports-table tr:hover td {
+  background: #fafafa;
+}
+
+/* Compliance dot */
+.compliance-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+/* === Status Badges === */
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+.badge.approved {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+.badge.reviewed {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+.badge.pending {
+  background: #fff7ed;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+.badge.rejected {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* === Guidelines === */
+.report-guideline {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: #374151;
+  font-size: 0.95rem;
+}
+.report-guideline .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--blue);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+/* === Buttons === */
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-outline:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* Small tweaks
+@media (max-width: 700px) {
+  .report-card .card-title { font-size: 1rem; }
+} */
+
+
+
+:root{
+  --brand: #B0712F;         /* primary brand */
+  --brand-dark: #8c5a1f;    /* darker brand (for strong backgrounds) */
+  --brand-light: #f8e7d5;   /* light brand background (for 'Reviewed') */
+  --brand-muted: #e9dccb;   /* very light tone */
+  --brand-contrast: #ffffff;/* text on dark brand */
+  --muted: #6b7280;
+}
+
+/* ---------- Brand badge palette ---------- */
+/* Strong brand (use for primary/approved) */
+/* Uniform badge size for status labels */
+.badge.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;      /* <-- force equal width */
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 20px;   /* pill shape */
+}
+
+.badge.bg-brand {
+  background-color: var(--brand) !important;
+  color: var(--brand-contrast) !important;
+  border: 1px solid rgba(0,0,0,0.04) !important;
+}
+.badge.bg-brand:hover { background-color: var(--brand-dark) !important; }
+
+/* Darker brand for high-contrast Approved */
+.badge.bg-brand-success {
+  background-color: var(--brand-dark) !important;
+  color: var(--brand-contrast) !important;
+}
+.badge.bg-brand-success:hover { background-color: #6e4417 !important; }
+
+/* Light brand style (Reviewed) - light bg, brand text + border */
+.badge.bg-brand-light {
+  background-color: var(--brand-light) !important;
+  color: var(--brand) !important;
+  border: 1px solid var(--brand) !important;
+}
+.badge.bg-brand-light:hover { background-color: #ecd2b4 !important; }
+
+/* Muted / subtle brand */
+.badge.bg-brand-muted {
+  background-color: var(--brand-muted) !important;
+  color: var(--brand-dark) !important;
+  border: 1px solid rgba(0,0,0,0.03) !important;
+}
+
+/* Outline variant for brand */
+.badge.bg-brand-outline {
+  background-color: transparent !important;
+  color: var(--brand) !important;
+  border: 1px solid var(--brand) !important;
+}
+.badge.bg-brand-outline:hover {
+  background-color: rgba(176,113,47,0.06) !important;
+}
+
+/* ---------- Map common statuses to readable classes ---------- */
+/* Use these directly in your JSX (e.g. <span className="badge bg-approved">Approved</span>) */
+.badge.bg-approved { /* Approved (strong, positive) */
+  background-color: var(--brand-dark) !important;
+  color: var(--brand-contrast) !important;
+}
+
+/* Reviewed - light brand */
+.badge.bg-reviewed {
+  background-color: var(--brand-light) !important;
+  color: var(--brand) !important;
+  border: 1px solid var(--brand) !important;
+}
+
+/* Pending - use Bootstrap warning */
+.badge.bg-warning {
+  background-color: #f59e0b !important; /* amber */
+  color: #1f2937 !important;
+}
+
+/* Rejected - use Bootstrap danger */
+.badge.bg-rejected {
+  background-color: #ef4444 !important;
+  color: #fff !important;
+}
+
+/* Critical / High priority */
+.badge.bg-critical {
+  background-color: #dc2626 !important;
+  color: #fff !important;
+}
+
+/* Info (teal / brand-friendly) */
+.badge.bg-info-brand {
+  background-color: #0ea5a2 !important;
+  color: #fff !important;
+}
+
+/* Success (green) */
+.badge.bg-brand-success {
+  background-color: #16a34a !important;
+  color: #fff !important;
+}
+
+/* Secondary neutral */
+.badge.bg-neutral {
+  background-color: #f3f4f6 !important;
+  color: #111827 !important;
+  border: 1px solid #e8eaec !important;
+}
+
+/* ---------- Small / pill helpers ---------- */
+.badge.badge-pill {
+  border-radius: 999px;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.badge.badge-sm { font-size: 0.72rem; padding: 0.25rem 0.45rem; }
+
+/* Outline small pill for symptoms (used earlier) */
+.badge.symptom {
+  background: #fff5f5;
+  color: #9b1c1c;
+  border: 1px solid #fee2e2;
+  padding: 0.28rem 0.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* spacing utility for multiple badges */
+.badge + .badge { margin-left: 0.45rem; }
+
+/* ---------- Accessibility: ensure enough contrast on small text ---------- */
+/* If brand-dark text on brand-light background is too low contrast in your environment,
+   adjust --brand-dark or --brand-light to increase contrast. */
+
+/* ---------- Optional: provide small hover darken for all brand badges ---------- */
+.badge[class*="bg-brand"]:hover,
+.badge.bg-approved:hover,
+.badge.bg-reviewed:hover,
+.badge.bg-rejected:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+}
+
+/* ---------- Keep Bootstrap default classes working (no override) ---------- */
+/* Avoid touching .badge.bg-warning/.badge.bg-danger etc. unless you want to fully replace them. */
+
