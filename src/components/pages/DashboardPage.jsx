@@ -5,10 +5,6 @@ import { RecentAlerts } from "../../RecentAlerts";
 import { QuickActions } from "../../QuickActions";
 import { FarmUnitsTable } from "../../FarmUnitsTable";
 
-/* If you kept dashboard CSS in a separate file, uncomment this line:
-import "../../styles/dashboard.css";
-*/
-
 const mockComplianceData = [
   { day: "Mon", completion: 95 },
   { day: "Tue", completion: 88 },

@@ -25,7 +25,7 @@ export function HealthPage({ onNavigate }) {
   const getStatusBadge = (status) => {
     switch (status) {
       case "Completed":
-        return <span className="badge default">Completed</span>;
+        return <span className="badge bg-success">Completed</span>;
       case "Ongoing":
         return <span className="badge secondary">Ongoing</span>;
       case "Scheduled":
@@ -50,7 +50,7 @@ export function HealthPage({ onNavigate }) {
       {/* header */}
       <div className="page-header">
         <div>
-          <h1 className="page-title">Health Records</h1>
+          {/* <h1 className="page-title">Health Records</h1> */}
           <p className="page-sub">Track animal health, treatments, and veterinary care</p>
         </div>
         <div>

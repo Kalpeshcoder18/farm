@@ -99,7 +99,7 @@ export function AnimalsPage() {
       {/* header */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <h2 className="fw-bold">Animal Management</h2>
+          {/* <h2 className="fw-bold">Animal Management</h2> */}
           <p className="text-muted">Monitor and manage all animals on the farm</p>
         </div>
 
@@ -116,7 +116,7 @@ export function AnimalsPage() {
       </div>
 
       {/* filters */}
-      <div className="row g-3 mb-4">
+      <div className="row g-3 mb-3">
         <div className="col-md-5">
           <div className="position-relative">
             <Search className="position-absolute top-50 start-0 translate-middle-y ms-3 text-muted" />
@@ -195,7 +195,7 @@ export function AnimalsPage() {
                         </span>
                       ))}
                       {animal.symptoms.length > 3 && (
-                        <span className="badge bg-secondary text-dark px-2 py-1">+{animal.symptoms.length - 3} more</span>
+                        <span className="badge bg-light text-dark px-2 py-1">+{animal.symptoms.length - 3} more</span>
                       )}
                     </div>
                   </div>
@@ -228,79 +228,139 @@ export function AnimalsPage() {
 
       {/* Modal with blurred backdrop and centered card */}
       {selectedAnimal && (
-        <div className="custom-modal-backdrop show" onClick={() => setSelectedAnimal(null)}>
-          <div className="custom-modal-dialog" onClick={(e) => e.stopPropagation()}>
-            <div className="custom-modal-content">
-              <div className="d-flex justify-content-between align-items-start pb-2">
-                <div>
-                  <h4 className="mb-1">{selectedAnimal.name} <span className="badge bg-light text-dark ms-2">{selectedAnimal.healthStatus}</span></h4>
-                  <div className="text-muted small">Breed: {selectedAnimal.breed} • {selectedAnimal.location}</div>
-                </div>
-                <button className="btn btn-sm btn-light" onClick={() => setSelectedAnimal(null)} aria-label="Close">
-                  <X size={18} />
-                </button>
-              </div>
+  <div
+    className="custom-modal-backdrop show"
+    onClick={() => setSelectedAnimal(null)}
+  >
+    <div
+      className="custom-modal-dialog"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="custom-modal-content">
+        {/* Header */}
+        <div className="d-flex justify-content-between align-items-start pb-2">
+          <div>
+            <h4 className="mb-1">
+              {selectedAnimal.name}{" "}
+              <span className="badge bg-light text-dark ms-2">
+                {selectedAnimal.healthStatus}
+              </span>
+            </h4>
+            <div className="text-muted small">
+              Breed: {selectedAnimal.breed} • {selectedAnimal.location}
+            </div>
+          </div>
+          <button
+            className="btn btn-sm btn-light"
+            onClick={() => setSelectedAnimal(null)}
+            aria-label="Close"
+          >
+            <X size={18} />
+          </button>
+        </div>
 
-              <hr />
+        <hr />
 
-              <div className="row g-3">
-                <div className="col-md-6">
-                  <div className="small text-muted mb-2">Age & Birth Date</div>
-                  <div className="fw-semibold">{selectedAnimal.age}</div>
-                  <div className="text-muted small">Born: {selectedAnimal.birthDate || "—"}</div>
+        {/* Info grid */}
+        <div className="row g-3">
+          <div className="col-md-6">
+            <div className="small text-muted mb-2">Age & Birth Date</div>
+            <div className="fw-semibold">{selectedAnimal.age}</div>
+            <div className="text-muted small">
+              Born: {selectedAnimal.birthDate || "—"}
+            </div>
 
-                  <hr />
+            <hr />
 
-                  <div className="small text-muted mb-2">Current Weight</div>
-                  <div className="fw-semibold">{selectedAnimal.weight}{typeof selectedAnimal.weight === "number" ? " kg" : ""}</div>
-                </div>
+            <div className="small text-muted mb-2">Current Weight</div>
+            <div className="fw-semibold">
+              {selectedAnimal.weight}
+              {typeof selectedAnimal.weight === "number" ? " kg" : ""}
+            </div>
+          </div>
 
-                <div className="col-md-6">
-                  <div className="small text-muted mb-2">Location & Batch</div>
-                  <div className="fw-semibold">{selectedAnimal.location}</div>
-                  <div className="text-muted small">{selectedAnimal.batchId}</div>
+          <div className="col-md-6">
+            <div className="small text-muted mb-2">Location & Batch</div>
+            <div className="fw-semibold">{selectedAnimal.location}</div>
+            <div className="text-muted small">{selectedAnimal.batchId}</div>
 
-                  <hr />
+            <hr />
 
-                  <div className="small text-muted mb-2">Breed & Type</div>
-                  <div className="fw-semibold">{selectedAnimal.breed} ({selectedAnimal.type})</div>
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <h6 className="mb-3">Health Information</h6>
-                <div className="p-3 border rounded mb-3">
-                  <div className="small text-muted">Health Status</div>
-                  <div className="mt-2"><span className={badgeClass(selectedAnimal.healthStatus)}>{selectedAnimal.healthStatus}</span></div>
-                </div>
-
-                <div className="p-3 border rounded mb-3">
-                  <div className="small text-muted">Current Notes</div>
-                  <div className="mt-2">{selectedAnimal.notes || "—"}</div>
-                </div>
-
-                <h6 className="mb-3">Vaccination Records</h6>
-                <div className="d-flex flex-wrap gap-2">
-                  {(selectedAnimal.vaccinations || []).map((v, i) => (
-                    <div key={i} className="vaccine-chip border rounded px-3 py-2">
-                      <span className="dot bg-success me-2" /> {v}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-4 d-flex gap-2 justify-content-end">
-                <button className="btn btn-dark d-flex align-items-center">
-                  <span className="me-2">🩺</span>
-                  Schedule Health Check
-                </button>
-                <button className="btn btn-outline-primary">Record Vaccination</button>
-                <button className="btn btn-outline-secondary" onClick={() => setSelectedAnimal(null)}>Close</button>
-              </div>
+            <div className="small text-muted mb-2">Breed & Type</div>
+            <div className="fw-semibold">
+              {selectedAnimal.breed} ({selectedAnimal.type})
             </div>
           </div>
         </div>
-      )}
+
+        {/* Health Information */}
+        <div className="mt-4">
+          <h6 className="mb-3">Health Information</h6>
+          <div className="p-3 border rounded mb-3">
+            <div className="small text-muted">Health Status</div>
+            <div className="mt-2">
+              <span className={badgeClass(selectedAnimal.healthStatus)}>
+                {selectedAnimal.healthStatus}
+              </span>
+            </div>
+          </div>
+
+          {/* Symptoms Section */}
+          <div className="p-3 border rounded mb-3">
+            <div className="small text-muted">Symptoms</div>
+            <div className="mt-2">
+              {selectedAnimal?.symptoms && selectedAnimal.symptoms.length > 0 ? (
+                <div className="symptoms">
+                  {selectedAnimal.symptoms.map((s, idx) => (
+                    <span key={idx} className="tag-danger">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-muted small">No symptoms</div>
+              )}
+            </div>
+          </div>
+
+          {/* Notes */}
+          <div className="p-3 border rounded mb-3">
+            <div className="small text-muted">Current Notes</div>
+            <div className="mt-2">{selectedAnimal.notes || "—"}</div>
+          </div>
+
+          {/* Vaccination Records */}
+          <h6 className="mb-3">Vaccination Records</h6>
+          <div className="d-flex flex-wrap gap-2">
+            {(selectedAnimal.vaccinations || []).map((v, i) => (
+              <div key={i} className="vaccine-chip border rounded px-3 py-2">
+                <span className="dot bg-success me-2" /> {v}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer buttons */}
+        <div className="mt-4 d-flex gap-2 justify-content-end">
+          <button className="btn btn-dark d-flex align-items-center">
+            <span className="me-2">🩺</span>
+            Schedule Health Check
+          </button>
+          <button className="btn btn-outline-primary">
+            Record Vaccination
+          </button>
+          <button
+            className="btn btn-outline-secondary"
+            onClick={() => setSelectedAnimal(null)}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }

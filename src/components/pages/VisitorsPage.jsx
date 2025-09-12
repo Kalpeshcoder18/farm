@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Plus, Search, LogIn, LogOut, Clock, Users } from "lucide-react";
 
-/**
- * VisitorsPage (Bootstrap)
- */
 export function VisitorsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
@@ -120,12 +117,11 @@ export function VisitorsPage() {
   };
 
   return (
-    <div className="container my-5">
-      {/* Header */}
+    <div className="container my-2">
       <div className="d-flex align-items-start justify-content-between mb-4">
         <div>
-          <h2 className="h4 fw-bold">Visitor Management</h2>
-          <p className="text-muted mb-0">Track and manage farm visitors for biosecurity</p>
+          {/* <h2 className="h4 fw-bold">Visitor Management</h2> */}
+          <p className="text-bold mb-0 mt-0">Track and manage farm visitors for biosecurity</p>
         </div>
         <div>
           <button className="btn btn-primary">

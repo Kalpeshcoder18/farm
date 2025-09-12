@@ -28,9 +28,9 @@ const menuItems = [
 
 export function Sidebar({ activeSection = "dashboard", onSectionChange = () => {} }) {
   return (
-    <aside className="sidebar" aria-label="Main sidebar">
-      <div style={{ padding: 20 }}>
-        <div className="sidebar-title">Farm Manager</div>
+    <aside className="sidebar sticky-top" aria-label="Main sidebar">
+      <div style={{ padding: 2 }}>
+        <div className="sidebar-title" style={{ fontSize:20}}>Farm Manager</div>
         <div className="sidebar-sub">Biosecurity System</div>
       </div>
 

@@ -232,11 +232,10 @@ export function ChecklistsPage() {
   };
 
   return (
-    <div className="container my-5">
+    <div className="container my-2">
       {/* Header */}
       <div className="d-flex align-items-start justify-content-between mb-4">
         <div>
-          <h1 className="h4 fw-bold">Worker Checklist</h1>
           <p className="text-muted mb-0">Manage daily worker protocols and compliance tracking</p>
         </div>
         <div>

@@ -78,12 +78,8 @@ export function ReportsPage() {
 };
 
   return (
-    <div className="container my-5">
+    <div className="container my-4">
       {/* Header */}
-      <div className="mb-4">
-        <h2 className="fw-bold text-brand">Manager Reports</h2>
-        <p className="text-muted">Submit operational reports to farm administration</p>
-      </div>
 
       {/* Submit Report Form - Full width */}
       <div className="card shadow-sm mb-4">
